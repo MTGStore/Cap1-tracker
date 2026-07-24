@@ -812,11 +812,7 @@ function dropCSV(e){
   if(file&&file.name.endsWith('.csv')) readCSV(file);
   else document.getElementById('csv-status').textContent='⚠️ Please drop a .csv file.';
 }
-document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('csv-drop').addEventListener('click',()=>{
-    document.getElementById('csv-file').click();
-  });
-});
+
 
 function readCSV(file){
   if(!file) return;

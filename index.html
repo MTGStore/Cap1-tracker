@@ -752,6 +752,18 @@ function openPayModal(sk){
   document.getElementById('mp-note').value=`$${fmt(total)} paid via ${store?store.name:sk} ops acc`;
   openModal('mo-pay');
 }
+  function recalcPayTotal(){
+  const store=SM[actSK];
+  let total=0;
+  actPend.forEach((_,i)=>{
+    const cb=document.getElementById(`pck-${i}`);
+    if(cb&&cb.checked) total+=parseFloat(cb.dataset.amt)||0;
+  });
+  const el=document.getElementById('mp-sel-tot');
+  if(el) el.textContent=`$${fmt(total)}`;
+  document.getElementById('mp-total').value=total.toFixed(2);
+  document.getElementById('mp-note').value=`$${fmt(total)} paid via ${store?store.name:actSK} ops acc`;
+}
 }
 function confirmPay(){
   const payoffDate=document.getElementById('mp-date').value;
@@ -759,10 +771,16 @@ function confirmPay(){
   const totalPaid=parseFloat(document.getElementById('mp-total').value);
   const note=document.getElementById('mp-note').value.trim();
   if(!payoffDate||!conf){alert('Enter Payoff Date and Confirmation Number.');return;}
+  const selectedIds=[];
+  actPend.forEach((t,i)=>{
+    const cb=document.getElementById(`pck-${i}`);
+    if(cb&&cb.checked) selectedIds.push(t.id);
+  });
+  if(!selectedIds.length){alert('Select at least one transaction.');return;}
   const pmt={id:uid(),storeKey:actSK,payoffDate,totalPaid,confirmationNumber:conf,
     payNote:note,createdAt:new Date().toISOString(),transactionIds:[]};
   txns.forEach(t=>{
-    if(t.status==='PENDING'&&t.stores.some(s=>s.storeKey===actSK)){
+    if(selectedIds.includes(t.id)){
       t.status='PAID'; t.paymentId=pmt.id; pmt.transactionIds.push(t.id);
     }
   });
@@ -773,7 +791,7 @@ function confirmPay(){
   if(at==='tab-records') renderRec();
   if(at==='tab-history') renderHist();
   const st=SM[actSK];
-  alert(`✅ Payment Recorded!\n\nStore: ${st?st.name:actSK}\nPaid: $${fmt(totalPaid)}\nConfo: ${conf}\nDate: ${payoffDate}`);
+  alert(`✅ Payment Recorded!\n\nStore: ${st?st.name:actSK}\nTransactions: ${selectedIds.length}\nPaid: $${fmt(totalPaid)}\nConfo: ${conf}\nDate: ${payoffDate}`);
 }
 
 /* ── HISTORY ── */

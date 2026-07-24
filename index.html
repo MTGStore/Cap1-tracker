@@ -9,31 +9,17 @@
 body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-highlight-color:transparent;min-height:100vh}
 .screen{display:none;min-height:100vh}.screen.active{display:block}
 
-.auth-wrap{min-height:100vh;display:flex;align-items:flex-start;justify-content:center;background:linear-gradient(135deg,#CC0000,#880000);padding:20px;padding-top:30px}
-.auth-box{background:white;border-radius:16px;padding:26px;width:100%;max-width:500px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
-.auth-logo{text-align:center;margin-bottom:20px}
-.auth-logo .icon{font-size:2.6rem}
-.auth-logo h1{color:#CC0000;font-size:1.3rem;font-weight:900;margin-top:6px}
-.auth-logo p{color:#888;font-size:.78rem;margin-top:3px}
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#CC0000,#880000);padding:20px}
+.auth-box{background:white;border-radius:16px;padding:30px;width:100%;max-width:400px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.auth-logo{text-align:center;margin-bottom:24px}
+.auth-logo .icon{font-size:3rem}
+.auth-logo h1{color:#CC0000;font-size:1.4rem;font-weight:900;margin-top:8px}
+.auth-logo p{color:#888;font-size:.8rem;margin-top:4px}
 
-.step-box{background:#FFF9E6;border:2px solid #FFD700;border-radius:10px;padding:13px;margin-bottom:12px}
-.step-num{display:inline-flex;align-items:center;justify-content:center;background:#CC0000;color:white;border-radius:50%;width:22px;height:22px;font-size:.72rem;font-weight:800;margin-right:7px;flex-shrink:0}
-.step-title{font-size:.88rem;font-weight:700;color:#333;display:inline}
-.step-body{font-size:.8rem;color:#555;margin-top:8px;line-height:1.65;padding-left:2px}
-.step-body ol{padding-left:16px}
-.step-body li{margin-bottom:3px}
-.step-body code{background:#f0f0f0;padding:1px 6px;border-radius:4px;font-size:.76rem;font-family:monospace;color:#CC0000}
-.step-body strong{color:#222}
-
-.mode-btn{display:block;width:100%;padding:13px;border:3px solid #ddd;border-radius:10px;background:white;font-size:.9rem;font-weight:700;cursor:pointer;margin-bottom:10px;text-align:left;transition:all .15s}
-.mode-btn:hover,.mode-btn.sel{border-color:#CC0000;background:#FFF9E6}
-.mode-btn .mi{font-size:1.3rem;margin-right:8px}
-.mode-btn small{display:block;font-weight:400;color:#888;font-size:.74rem;margin-top:3px;padding-left:30px}
-
-.fg{margin-bottom:13px}
-.fg label{display:block;font-size:.72rem;font-weight:700;color:#CC0000;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
-.fg input,.fg select,.fg textarea{width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:7px;font-size:.92rem;background:white;color:#222;appearance:auto}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#FFD700;outline:none;box-shadow:0 0 0 3px rgba(255,215,0,.25)}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.72rem;font-weight:700;color:#CC0000;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 13px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;background:white;color:#222}
+.fg input:focus,.fg select:focus{border-color:#FFD700;outline:none;box-shadow:0 0 0 3px rgba(255,215,0,.25)}
 .fr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .err{color:#CC0000;font-size:.78rem;margin-top:5px;display:none}.err.show{display:block}
 
@@ -41,7 +27,6 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 .btn:active{opacity:.75}
 .btn-red{background:#CC0000;color:white}.btn-green{background:#198754;color:white}
 .btn-yellow{background:#FFD700;color:#222}.btn-gray{background:#6c757d;color:white}
-.btn-outline{background:white;border:2px solid #CC0000;color:#CC0000}
 .btn-sm{padding:6px 11px;font-size:.76rem;border-radius:6px}
 .btn-full{width:100%;padding:13px;font-size:.95rem}
 .pw{position:relative}.pw input{padding-right:44px}
@@ -123,9 +108,10 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 .phi-h{display:flex;justify-content:space-between;font-weight:800;font-size:.88rem}
 .phi-d{font-size:.71rem;color:#555;margin-top:3px}
 
-/* Loading spinner — hidden by JS on load */
-#loading{position:fixed;inset:0;background:rgba(255,215,0,.93);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;font-size:1rem;font-weight:700;color:#CC0000;gap:10px}
-#loading .spin{font-size:2rem;animation:spin 1s linear infinite}
+#loading{position:fixed;inset:0;background:#FFD700;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:14px}
+#loading .spin{font-size:2.5rem;animation:spin 1s linear infinite}
+#loading p{font-size:1rem;font-weight:800;color:#CC0000}
+#loading small{font-size:.75rem;color:#555}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 #screen-cpa{background:white;min-height:100vh}
@@ -155,76 +141,20 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 </head>
 <body>
 
-<div id="loading"><div class="spin">⚙️</div><div>Loading...</div></div>
-
-<!-- SCREEN 1: SETUP -->
-<div id="screen-setup" class="screen">
- <div class="auth-wrap">
-  <div class="auth-box">
-   <div class="auth-logo">
-     <div class="icon">💳</div>
-     <h1>Capital One Payment Tracker</h1>
-     <p>First-time setup — choose your data storage</p>
-   </div>
-   <p style="font-size:.82rem;color:#555;margin-bottom:12px;font-weight:600;">How do you want to store your data?</p>
-   <button class="mode-btn" id="btn-online" onclick="selMode('online')">
-     <span class="mi">☁️</span>Online — Google Sheets (Recommended)
-     <small>Data saved to your own Google Sheet. Access from any phone, iPad, or computer.</small>
-   </button>
-   <button class="mode-btn" id="btn-local" onclick="selMode('local')">
-     <span class="mi">💾</span>Local — This Device Only
-     <small>Data stays in this browser. Works offline. No setup needed.</small>
-   </button>
-   <div id="online-setup" style="display:none;margin-top:14px;">
-     <div class="step-box">
-       <span class="step-num">1</span><span class="step-title">Create a Google Sheet</span>
-       <div class="step-body"><ol>
-         <li>Go to <strong>sheets.google.com</strong> → click <strong>"+"</strong></li>
-         <li>Name it: <code>Capital One Tracker 2026</code></li>
-       </ol></div>
-     </div>
-     <div class="step-box">
-       <span class="step-num">2</span><span class="step-title">Open Script Editor &amp; Paste Code</span>
-       <div class="step-body"><ol>
-         <li>In your sheet: <strong>Extensions → Apps Script</strong></li>
-         <li>Open <code>AppsScript_Backend.js</code> in Notepad → Ctrl+A → Ctrl+C</li>
-         <li>In Apps Script: Ctrl+A → Delete → Ctrl+V → Save (Ctrl+S)</li>
-       </ol></div>
-     </div>
-     <div class="step-box">
-       <span class="step-num">3</span><span class="step-title">Set Token &amp; Deploy</span>
-       <div class="step-body"><ol>
-         <li>Change <code>CAP1-HARRY-CHANGE-ME</code> to your own token, write it down</li>
-         <li><strong>Deploy → New Deployment → Web App</strong></li>
-         <li>Execute as: <strong>Me</strong> · Who has access: <strong>Anyone</strong></li>
-         <li>Deploy → Authorize → copy the URL</li>
-       </ol></div>
-     </div>
-     <div class="fg" style="margin-top:8px;">
-       <label>Google Apps Script URL *</label>
-       <input type="url" id="s-url" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off">
-     </div>
-     <div class="fg">
-       <label>Your Secret Token *</label>
-       <div class="pw">
-         <input type="password" id="s-token" placeholder="e.g. CAP1-HARRY-977381" autocomplete="off">
-         <button class="pw-tog" onclick="togVis('s-token',this)" tabindex="-1">👁️</button>
-       </div>
-     </div>
-   </div>
-   <div id="setup-msg" style="display:none;" class="alert aw"></div>
-   <button class="btn btn-red btn-full" onclick="saveSetup()" style="margin-top:12px;">Continue →</button>
-  </div>
- </div>
+<!-- LOADING -->
+<div id="loading">
+  <div class="spin">💳</div>
+  <p>Capital One Tracker</p>
+  <small>Loading from Google Sheets...</small>
 </div>
 
-<!-- SCREEN 2: LOGIN -->
+<!-- SCREEN: LOGIN -->
 <div id="screen-login" class="screen">
  <div class="auth-wrap">
   <div class="auth-box">
    <div class="auth-logo">
-     <div class="icon">🔐</div>
-     <h1>Capital One Payment Tracker</h1>
+     <div class="icon">💳</div>
+     <h1>Capital One Payment Record</h1>
      <p>SQS Card · Multi-Store Expense Tracker</p>
    </div>
    <div class="fg">
@@ -237,15 +167,12 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
      <div class="err" id="login-err">Incorrect password. Please try again.</div>
    </div>
    <button class="btn btn-red btn-full" onclick="login()">Unlock →</button>
-   <p style="text-align:center;font-size:.7rem;color:#bbb;margin-top:12px;">Forgot password? Contact Harry Desai</p>
-   <div style="margin-top:16px;padding-top:12px;border-top:1px solid #eee;text-align:center;">
-     <button class="btn btn-outline btn-sm" onclick="resetSetup()">⚙️ Change Storage Settings</button>
-   </div>
+   <p style="text-align:center;font-size:.7rem;color:#ccc;margin-top:14px;">Harry Desai · Capital One SQS Card</p>
   </div>
  </div>
 </div>
 
-<!-- SCREEN 3: MAIN APP -->
+<!-- SCREEN: MAIN APP -->
 <div id="screen-app" class="screen">
  <div class="hdr">
    <div class="hdr-top">
@@ -340,7 +267,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
   <!-- PAY -->
   <div id="tab-pay" class="tab">
     <div class="card" style="background:#FFF9E6;">
-      <p style="font-size:.82rem;color:#555;">Select a store, enter the Capital One confirmation number, and mark it paid.</p>
+      <p style="font-size:.82rem;color:#555;">Select a store below, enter the Capital One confirmation number, and mark it paid.</p>
     </div>
     <div id="pay-body"></div>
   </div>
@@ -370,7 +297,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
  </div>
 </div>
 
-<!-- SCREEN 4: CPA REPORT -->
+<!-- SCREEN: CPA REPORT -->
 <div id="screen-cpa" class="screen">
  <div class="cpa-tb">
    <h2>📄 CPA Report</h2>
@@ -402,6 +329,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
   </div>
  </div>
 </div>
+
 <div class="mo" id="mo-del">
  <div class="md">
   <div class="md-title">🗑️ Delete Transaction?</div>
@@ -412,6 +340,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
   </div>
  </div>
 </div>
+
 <div class="mo" id="mo-undo">
  <div class="md">
   <div class="md-title">↩️ Undo Payment?</div>
@@ -424,8 +353,14 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 </div>
 
 <script>
-const PASS_B64='OTc3Mzgx'; // btoa('977381')
-const STORES=[
+/* ════════════════════════════════════
+   HARDCODED CONFIG — no setup screen
+════════════════════════════════════ */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzq-6jf1pjfKnWJN79fcocmJUAUWEctOh5ParXCA2_Xeoe2Rem29ftwJVXyHjRKg6C3/exec';
+const API_TOKEN  = 'CAP1-HARRY-977381';
+const PASS_B64   = 'OTc3Mzgx'; // btoa('977381')
+
+const STORES = [
   {key:'KC9',      name:'KC9 - KC Mart 09',    ba:'KC9 6613'},
   {key:'SQS',      name:'SQS',                  ba:'SQS 3VD 5246'},
   {key:'HP',       name:'HP - Hickory Point',   ba:'HP 7578'},
@@ -442,59 +377,21 @@ const STORES=[
   {key:'MTG7',     name:'MTG-7 / Rutva',         ba:''},
   {key:'HARRY',    name:'Harry (Personal)',       ba:'Harry Wfargo / Truist'},
 ];
-const SM=Object.fromEntries(STORES.map(s=>[s.key,s]));
-let cfg={},txns=[],pmts=[],authed=false,splitCnt=0,saveTimer=null;
+const SM = Object.fromEntries(STORES.map(s=>[s.key,s]));
 
-/* ── BOOT — fix: directly set display:none instead of class toggle ── */
-window.addEventListener('load',()=>{
-  cfg=JSON.parse(localStorage.getItem('cap1_cfg')||'null')||{};
-  document.getElementById('loading').style.display='none';
-  if(!cfg.mode){showScr('screen-setup');return;}
+let txns=[], pmts=[], authed=false, splitCnt=0, saveTimer=null;
+
+/* ── BOOT ── */
+window.addEventListener('load', () => {
+  // Go straight to login — no setup screen ever
+  document.getElementById('loading').style.display = 'none';
   showScr('screen-login');
+  document.getElementById('login-pw').focus();
 });
 
 function showScr(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-}
-
-/* ── SETUP ── */
-let selM='';
-function selMode(m){
-  selM=m;
-  document.getElementById('btn-online').classList.toggle('sel',m==='online');
-  document.getElementById('btn-local').classList.toggle('sel',m==='local');
-  document.getElementById('online-setup').style.display=m==='online'?'block':'none';
-}
-async function saveSetup(){
-  const msgEl=document.getElementById('setup-msg');
-  msgEl.style.display='none';
-  if(!selM){showMsg(msgEl,'Please choose a storage mode.','aw');return;}
-  if(selM==='online'){
-    const url=document.getElementById('s-url').value.trim();
-    const token=document.getElementById('s-token').value.trim();
-    if(!url||!token){showMsg(msgEl,'Please fill in the Script URL and Secret Token.','aw');return;}
-    showMsg(msgEl,'🔄 Testing connection to Google Sheets...','aw');
-    try{
-      const res=await fetch(`${url}?token=${encodeURIComponent(token)}`);
-      if(!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json=await res.json();
-      if(json.error) throw new Error(json.error);
-      cfg={mode:'online',scriptUrl:url,token};
-    }catch(e){
-      showMsg(msgEl,'❌ Could not connect: '+e.message,'ae');
-      return;
-    }
-  }else{
-    cfg={mode:'local'};
-  }
-  localStorage.setItem('cap1_cfg',JSON.stringify(cfg));
-  msgEl.style.display='none';
-  showScr('screen-login');
-}
-function resetSetup(){
-  localStorage.removeItem('cap1_cfg');cfg={};authed=false;txns=[];pmts=[];
-  showScr('screen-setup');
 }
 
 /* ── AUTH ── */
@@ -503,70 +400,70 @@ function togVis(id,btn){
   el.type=el.type==='password'?'text':'password';
   btn.textContent=el.type==='password'?'👁️':'🙈';
 }
+
 function login(){
   const pw=document.getElementById('login-pw').value;
   const errEl=document.getElementById('login-err');
   if(btoa(pw)===PASS_B64){
-    errEl.classList.remove('show');authed=true;
+    errEl.classList.remove('show');
     document.getElementById('login-pw').value='';
     loadData();
-  }else{
+  } else {
     errEl.classList.add('show');
     document.getElementById('login-pw').select();
   }
 }
-function logout(){authed=false;txns=[];pmts=[];showScr('screen-login');}
+
+function logout(){ authed=false; txns=[]; pmts=[]; showScr('screen-login'); }
 
 /* ── DATA SYNC ── */
 async function loadData(){
-  setSyn('loading','🔄 Loading...');
-  try{
-    if(cfg.mode==='online'){
-      const res=await fetch(`${cfg.scriptUrl}?token=${encodeURIComponent(cfg.token)}`);
-      if(!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json=await res.json();
-      if(json.error) throw new Error(json.error);
-      txns=json.txns||[];
-      pmts=json.payments||[];
-      setSyn('ok','✅ Google Sheets');
-    }else{
-      txns=JSON.parse(localStorage.getItem('cap1_txns')||'[]');
-      pmts=JSON.parse(localStorage.getItem('cap1_pmts')||'[]');
-      setSyn('ok','💾 Local');
-    }
-  }catch(e){
-    txns=JSON.parse(localStorage.getItem('cap1_txns')||'[]');
-    pmts=JSON.parse(localStorage.getItem('cap1_pmts')||'[]');
-    setSyn('err','⚠️ Offline — local copy');
-  }
-  initApp();
   showScr('screen-app');
+  setSyn('loading','🔄 Loading from Sheets...');
+  try {
+    const res  = await fetch(`${SCRIPT_URL}?token=${encodeURIComponent(API_TOKEN)}`);
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if(json.error) throw new Error(json.error);
+    txns = json.txns     || [];
+    pmts = json.payments || [];
+    setSyn('ok','✅ Google Sheets');
+  } catch(e){
+    // Fall back to local cache if Sheets unreachable
+    txns = JSON.parse(localStorage.getItem('cap1_txns')||'[]');
+    pmts = JSON.parse(localStorage.getItem('cap1_pmts')||'[]');
+    setSyn('err','⚠️ Offline — showing local copy');
+  }
+  authed = true;
+  initApp();
 }
+
 async function persist(){
-  localStorage.setItem('cap1_txns',JSON.stringify(txns));
-  localStorage.setItem('cap1_pmts',JSON.stringify(pmts));
+  // Always write local backup
+  localStorage.setItem('cap1_txns', JSON.stringify(txns));
+  localStorage.setItem('cap1_pmts', JSON.stringify(pmts));
   updateSub();
-  if(cfg.mode!=='online') return;
   clearTimeout(saveTimer);
-  setSyn('saving','🔄 Saving...');
-  saveTimer=setTimeout(async()=>{
-    try{
-      const res=await fetch(cfg.scriptUrl,{
+  setSyn('saving','🔄 Saving to Sheets...');
+  saveTimer = setTimeout(async()=>{
+    try {
+      const res  = await fetch(SCRIPT_URL,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({token:cfg.token,txns,payments:pmts})
+        body:JSON.stringify({token:API_TOKEN, txns, payments:pmts})
       });
       if(!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json=await res.json();
+      const json = await res.json();
       if(json.error) throw new Error(json.error);
       setSyn('ok','✅ Saved to Sheets');
-    }catch(e){
-      setSyn('err','⚠️ Sheets sync failed');
+    } catch(e){
+      setSyn('err','⚠️ Saved locally — Sheets sync failed');
     }
   },800);
 }
+
 function setSyn(state,txt){
-  const el=document.getElementById('sync-st');if(!el)return;
+  const el=document.getElementById('sync-st'); if(!el) return;
   el.textContent=txt;
   el.style.background=state==='ok'?'#D1E7DD':state==='err'?'#F8D7DA':'rgba(0,0,0,.1)';
   el.style.color=state==='ok'?'#0A3622':state==='err'?'#842029':'#333';
@@ -576,7 +473,7 @@ function setSyn(state,txt){
 function initApp(){
   const opts=STORES.map(s=>`<option value="${s.key}">${s.name}</option>`).join('');
   ['f-store','flt-store','cpa-store'].forEach(id=>{
-    const el=document.getElementById(id);if(!el)return;
+    const el=document.getElementById(id); if(!el) return;
     const pre=id==='f-store'?'<option value="">-- Select Store --</option>':'<option value="">All Stores</option>';
     el.innerHTML=pre+opts;
   });
@@ -600,11 +497,12 @@ function swTab(tab,btn){
   if(tab==='pay')     renderPay();
   if(tab==='history') renderHist();
 }
+
 function updateSub(){
   const pend=txns.filter(t=>t.status==='PENDING');
   const tot=pend.reduce((s,t)=>s+t.amount,0);
   const el=document.getElementById('hdr-sub');
-  if(el) el.textContent=`${cfg.mode==='online'?'☁️ Google Sheets':'💾 Local'} · ${pend.length} pending · $${fmt(tot)} due`;
+  if(el) el.textContent=`☁️ Google Sheets · ${pend.length} pending · $${fmt(tot)} due`;
 }
 
 /* ── SPLIT ── */
@@ -618,7 +516,7 @@ function addSR(){
   const rid='sr-'+splitCnt;
   const opts=STORES.map(s=>`<option value="${s.key}">${s.name}</option>`).join('');
   const d=document.createElement('div');
-  d.className='sr-item';d.id=rid;
+  d.className='sr-item'; d.id=rid;
   d.innerHTML=`
     <div class="fg"><label>Store</label>
       <select class="sr-st" onchange="chkSplit()" style="width:100%;padding:9px;border:2px solid #ddd;border-radius:7px;">
@@ -649,21 +547,21 @@ function addTxn(){
   const notes=document.getElementById('f-notes').value.trim();
   const isSplit=document.getElementById('f-split').checked;
   if(!date||!vendor||isNaN(amount)||amount<=0||!purpose){
-    showAlert('add-alert','⚠️ Fill in Date, Vendor, Amount, and Purpose.','aw');return;
+    showAlert('add-alert','⚠️ Fill in Date, Vendor, Amount, and Purpose.','aw'); return;
   }
   let stores=[];
   if(!isSplit){
     const sk=document.getElementById('f-store').value;
     if(!sk){showAlert('add-alert','⚠️ Select a store.','aw');return;}
     stores=[{storeKey:sk,amount}];
-  }else{
+  } else {
     const sts=[...document.querySelectorAll('.sr-st')];
     const ams=[...document.querySelectorAll('.sr-am')];
     let st=0;
     for(let i=0;i<sts.length;i++){
       const sk=sts[i].value,sa=parseFloat(ams[i].value);
       if(!sk||isNaN(sa)||sa<=0){showAlert('add-alert','⚠️ Fill all split rows.','aw');return;}
-      stores.push({storeKey:sk,amount:sa});st+=sa;
+      stores.push({storeKey:sk,amount:sa}); st+=sa;
     }
     if(Math.abs(st-amount)>0.02){showAlert('add-alert',`⚠️ Split $${fmt(st)} ≠ total $${fmt(amount)}.`,'aw');return;}
   }
@@ -674,7 +572,7 @@ function addTxn(){
   document.getElementById('f-store').value='';
   document.getElementById('f-split').checked=false;
   document.getElementById('split-rows').innerHTML='';
-  splitCnt=0;togSplit();addSR();
+  splitCnt=0; togSplit(); addSR();
   document.getElementById('f-date').value=today();
   showAlert('add-alert',`✅ Added: ${vendor} — $${fmt(amount)}`,'as');
 }
@@ -683,7 +581,7 @@ function addTxn(){
 function renderPending(){
   const pend=txns.filter(t=>t.status==='PENDING');
   const bySt={};
-  pend.forEach(t=>{t.stores.forEach(s=>{
+  pend.forEach(t=>{ t.stores.forEach(s=>{
     if(!bySt[s.storeKey]) bySt[s.storeKey]={items:[],total:0};
     bySt[s.storeKey].items.push({t,amt:s.amount});
     bySt[s.storeKey].total+=s.amount;
@@ -697,7 +595,7 @@ function renderPending(){
     <div class="si"><div class="val">$${fmt(grand)}</div><div class="lbl">Total Pending</div></div>`;
   if(!sc){document.getElementById('pend-body').innerHTML='<div class="es"><div class="ei">✅</div><p>All caught up!</p></div>';return;}
   document.getElementById('pend-body').innerHTML=Object.keys(bySt).sort().map(sk=>{
-    const store=SM[sk];const{items,total}=bySt[sk];
+    const store=SM[sk]; const {items,total}=bySt[sk];
     const rows=items.map(({t,amt})=>`
       <div class="tr-row">
         <span class="tdate">${fd(t.postedDate)}</span>
@@ -733,7 +631,7 @@ function renderRec(){
     document.getElementById('rec-desk').style.display='none';
     document.getElementById('rec-mob').style.display='block';
     renderMob(list);
-  }else{
+  } else {
     document.getElementById('rec-desk').style.display='block';
     document.getElementById('rec-mob').style.display='none';
     renderDesk(list);
@@ -782,13 +680,13 @@ function renderMob(list){
 /* ── PAY TAB ── */
 function renderPay(){
   const bySt={};
-  txns.filter(t=>t.status==='PENDING').forEach(t=>{t.stores.forEach(s=>{
+  txns.filter(t=>t.status==='PENDING').forEach(t=>{ t.stores.forEach(s=>{
     if(!bySt[s.storeKey]) bySt[s.storeKey]={count:0,total:0};
-    bySt[s.storeKey].count++;bySt[s.storeKey].total+=s.amount;
+    bySt[s.storeKey].count++; bySt[s.storeKey].total+=s.amount;
   });});
   if(!Object.keys(bySt).length){document.getElementById('pay-body').innerHTML='<div class="es"><div class="ei">✅</div><p>Nothing to pay!</p></div>';return;}
   document.getElementById('pay-body').innerHTML=Object.keys(bySt).sort().map(sk=>{
-    const st=SM[sk];const{count,total}=bySt[sk];
+    const st=SM[sk]; const {count,total}=bySt[sk];
     return `<div class="sc"><div class="sch">
       <div><h3>${st?st.name:sk}</h3>
         <div class="acct">${st&&st.ba?'Pay from: '+st.ba+' · ':''} ${count} charge${count!==1?'s':''}</div></div>
@@ -803,7 +701,7 @@ function renderPay(){
 /* ── PAY MODAL ── */
 let actSK=null;
 function openPayModal(sk){
-  actSK=sk;const store=SM[sk];
+  actSK=sk; const store=SM[sk];
   const pend=txns.filter(t=>t.status==='PENDING'&&t.stores.some(s=>s.storeKey===sk));
   const total=pend.reduce((s,t)=>{const si=t.stores.find(x=>x.storeKey===sk);return s+(si?.amount||0);},0);
   document.getElementById('mp-title').textContent=`Pay — ${store?store.name:sk}`;
@@ -830,10 +728,10 @@ function confirmPay(){
     payNote:note,createdAt:new Date().toISOString(),transactionIds:[]};
   txns.forEach(t=>{
     if(t.status==='PENDING'&&t.stores.some(s=>s.storeKey===actSK)){
-      t.status='PAID';t.paymentId=pmt.id;pmt.transactionIds.push(t.id);
+      t.status='PAID'; t.paymentId=pmt.id; pmt.transactionIds.push(t.id);
     }
   });
-  pmts.push(pmt);persist();closeModal();
+  pmts.push(pmt); persist(); closeModal();
   const at=document.querySelector('.tab.active')?.id;
   if(at==='tab-pending') renderPending();
   if(at==='tab-pay')     renderPay();
@@ -848,7 +746,7 @@ function renderHist(){
   if(!pmts.length){document.getElementById('hist-body').innerHTML='<div class="es"><div class="ei">🏦</div><p>No payments yet.</p></div>';return;}
   const sorted=[...pmts].sort((a,b)=>new Date(b.payoffDate)-new Date(a.payoffDate));
   document.getElementById('hist-body').innerHTML=sorted.map(p=>{
-    const st=SM[p.storeKey];const cnt=p.transactionIds.length;
+    const st=SM[p.storeKey]; const cnt=p.transactionIds.length;
     return `<div class="phi">
       <div class="phi-h"><span>${st?st.name:p.storeKey}</span><span style="color:#CC0000;">$${fmt(p.totalPaid)}</span></div>
       <div class="phi-d">📅 ${fd(p.payoffDate)} &nbsp;·&nbsp; 🔑 <strong style="font-family:monospace;">${esc(p.confirmationNumber)}</strong></div>
@@ -858,33 +756,32 @@ function renderHist(){
   }).join('');
 }
 
-/* ── DELETE/UNDO ── */
-let delId=null,undoId=null;
+/* ── DELETE / UNDO ── */
+let delId=null, undoId=null;
 function openDelModal(id){
-  delId=id;const t=txns.find(x=>x.id===id);if(!t)return;
+  delId=id; const t=txns.find(x=>x.id===id); if(!t) return;
   document.getElementById('md-del-d').textContent=`Delete "${t.chargedBy}" — $${fmt(t.amount)} posted ${fd(t.postedDate)}? This cannot be undone.`;
   openModal('mo-del');
 }
-function confirmDel(){txns=txns.filter(t=>t.id!==delId);persist();closeModal();renderRec();renderPending();}
+function confirmDel(){ txns=txns.filter(t=>t.id!==delId); persist(); closeModal(); renderRec(); renderPending(); }
 function openUndoModal(id){
-  undoId=id;const t=txns.find(x=>x.id===id);if(!t)return;
+  undoId=id; const t=txns.find(x=>x.id===id); if(!t) return;
   const pmt=pmts.find(p=>p.id===t.paymentId);
   document.getElementById('md-undo-d').textContent=`This reverses the entire payment batch containing "${t.chargedBy}" and removes confo# ${pmt?.confirmationNumber||''}. All transactions in that batch go back to PENDING.`;
   openModal('mo-undo');
 }
 function confirmUndo(){
-  const t=txns.find(x=>x.id===undoId);if(!t){closeModal();return;}
+  const t=txns.find(x=>x.id===undoId); if(!t){closeModal();return;}
   const pmtId=t.paymentId;
   txns.forEach(x=>{if(x.paymentId===pmtId){x.status='PENDING';x.paymentId=null;}});
   pmts=pmts.filter(p=>p.id!==pmtId);
-  persist();closeModal();renderRec();renderPending();
+  persist(); closeModal(); renderRec(); renderPending();
 }
 
 /* ── IMPORT ── */
 let impRows=[];
 function parseImp(){
-  const text=document.getElementById('imp-text').value.trim();
-  if(!text)return;
+  const text=document.getElementById('imp-text').value.trim(); if(!text) return;
   const lines=text.split('\n').map(l=>l.trim()).filter(Boolean);
   impRows=[];
   lines.forEach(line=>{
@@ -899,7 +796,7 @@ function parseImp(){
     let date='';
     if(/\d{1,2}\/\d{1,2}\/\d{4}/.test(rawDate)){
       const[m,d,y]=rawDate.split('/');date=`${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
-    }else if(/\d{4}-\d{2}-\d{2}/.test(rawDate)){date=rawDate;}else return;
+    } else if(/\d{4}-\d{2}-\d{2}/.test(rawDate)){date=rawDate;} else return;
     impRows.push({date,desc:rawDesc,amount:Math.abs(amount)});
   });
   if(!impRows.length){document.getElementById('imp-prev').innerHTML='<div class="alert aw">⚠️ Could not parse. Check format.</div>';return;}
@@ -947,8 +844,8 @@ function exportCSV(){
   const hdr=['Posted Date','Charged By','Amount','Store','Ops Account','Purpose','Notes',
     'Payoff Date','Confirmation #','Status','Amount Paid','Pay Note'];
   const rows=list.flatMap(t=>t.stores.map(s=>{
-    const st=SM[s.storeKey];const pmt=pmts.find(p=>p.id===t.paymentId);
-    return[t.postedDate,t.chargedBy,t.amount.toFixed(2),
+    const st=SM[s.storeKey]; const pmt=pmts.find(p=>p.id===t.paymentId);
+    return [t.postedDate,t.chargedBy,t.amount.toFixed(2),
       st?st.name:s.storeKey,st?st.ba:'',t.purpose,t.notes||'',
       pmt?pmt.payoffDate:'',pmt?pmt.confirmationNumber:'',
       t.status,pmt?pmt.totalPaid.toFixed(2):'',pmt?pmt.payNote:''];
@@ -956,12 +853,12 @@ function exportCSV(){
   const csv=[hdr,...rows].map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));
-  a.download=`CapOne_${today()}.csv`;a.click();
+  a.download=`CapOne_${today()}.csv`; a.click();
 }
 
 /* ── CPA ── */
-function openCPA(){renderCPA();showScr('screen-cpa');}
-function closeCPA(){showScr('screen-app');}
+function openCPA(){ renderCPA(); showScr('screen-cpa'); }
+function closeCPA(){ showScr('screen-app'); }
 function renderCPA(){
   const from=document.getElementById('cpa-from').value;
   const to  =document.getElementById('cpa-to').value;
@@ -972,10 +869,10 @@ function renderCPA(){
   if(to)   list=list.filter(t=>t.postedDate<=to);
   list.sort((a,b)=>new Date(a.postedDate)-new Date(b.postedDate));
   const stSum={};
-  list.forEach(t=>{t.stores.forEach(s=>{
+  list.forEach(t=>{ t.stores.forEach(s=>{
     if(fsk&&s.storeKey!==fsk) return;
     if(!stSum[s.storeKey]) stSum[s.storeKey]={name:SM[s.storeKey]?.name||s.storeKey,total:0,paid:0,pending:0,cnt:0};
-    stSum[s.storeKey].total+=s.amount;stSum[s.storeKey].cnt++;
+    stSum[s.storeKey].total+=s.amount; stSum[s.storeKey].cnt++;
     if(t.status==='PAID') stSum[s.storeKey].paid+=s.amount;
     else stSum[s.storeKey].pending+=s.amount;
   });});
@@ -1034,31 +931,30 @@ function renderCPA(){
 }
 
 /* ── MODAL HELPERS ── */
-function openModal(id){document.getElementById(id).classList.add('open');}
+function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(){
   document.querySelectorAll('.mo').forEach(m=>m.classList.remove('open'));
   actSK=delId=undoId=null;
 }
 document.querySelectorAll('.mo').forEach(el=>{
-  el.addEventListener('click',e=>{if(e.target===el)closeModal();});
+  el.addEventListener('click',e=>{ if(e.target===el) closeModal(); });
 });
 
 /* ── UTILS ── */
-function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
-function today(){return new Date().toISOString().split('T')[0];}
-function fmt(n){return(Math.round(n*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
-function fd(iso){if(!iso)return'';try{const[y,m,d]=iso.split('-');return`${parseInt(m)}/${parseInt(d)}/${y}`;}catch(e){return iso;}}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function showMsg(el,msg,cls){el.className='alert '+cls;el.textContent=msg;el.style.display='block';}
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function today(){ return new Date().toISOString().split('T')[0]; }
+function fmt(n){ return (Math.round(n*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','); }
+function fd(iso){ if(!iso)return''; try{const[y,m,d]=iso.split('-');return`${parseInt(m)}/${parseInt(d)}/${y}`;}catch(e){return iso;} }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function showAlert(id,msg,cls){
-  const el=document.getElementById(id);if(!el)return;
+  const el=document.getElementById(id); if(!el) return;
   el.innerHTML=`<div class="alert ${cls}">${msg}</div>`;
-  setTimeout(()=>{if(el)el.innerHTML='';},5000);
+  setTimeout(()=>{ if(el) el.innerHTML=''; },5000);
 }
 let rTimer;
 window.addEventListener('resize',()=>{
   clearTimeout(rTimer);
-  rTimer=setTimeout(()=>{if(document.getElementById('tab-records').classList.contains('active'))renderRec();},250);
+  rTimer=setTimeout(()=>{ if(document.getElementById('tab-records').classList.contains('active')) renderRec(); },250);
 });
 </script>
 </body>

@@ -8,21 +8,18 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-highlight-color:transparent;min-height:100vh}
 .screen{display:none;min-height:100vh}.screen.active{display:block}
-
 .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#CC0000,#880000);padding:20px}
 .auth-box{background:white;border-radius:16px;padding:30px;width:100%;max-width:400px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
 .auth-logo{text-align:center;margin-bottom:24px}
 .auth-logo .icon{font-size:3rem}
 .auth-logo h1{color:#CC0000;font-size:1.4rem;font-weight:900;margin-top:8px}
 .auth-logo p{color:#888;font-size:.8rem;margin-top:4px}
-
 .fg{margin-bottom:14px}
 .fg label{display:block;font-size:.72rem;font-weight:700;color:#CC0000;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
 .fg input,.fg select,.fg textarea{width:100%;padding:11px 13px;border:2px solid #ddd;border-radius:8px;font-size:.95rem;background:white;color:#222}
 .fg input:focus,.fg select:focus{border-color:#FFD700;outline:none;box-shadow:0 0 0 3px rgba(255,215,0,.25)}
 .fr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .err{color:#CC0000;font-size:.78rem;margin-top:5px;display:none}.err.show{display:block}
-
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:10px 18px;border:none;border-radius:8px;font-size:.86rem;font-weight:700;cursor:pointer;transition:opacity .15s}
 .btn:active{opacity:.75}
 .btn-red{background:#CC0000;color:white}.btn-green{background:#198754;color:white}
@@ -31,26 +28,21 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 .btn-full{width:100%;padding:13px;font-size:.95rem}
 .pw{position:relative}.pw input{padding-right:44px}
 .pw-tog{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:#999;padding:4px}
-
 .hdr{background:#FFD700;padding:10px 13px 8px;border-bottom:4px solid #CC0000;position:sticky;top:0;z-index:200}
 .hdr-top{display:flex;align-items:center;justify-content:space-between}
 .hdr-title{color:#CC0000;font-size:1.1rem;font-weight:900}
 .hdr-acts{display:flex;align-items:center;gap:7px}
 .sync-badge{font-size:.68rem;padding:3px 8px;border-radius:20px;background:rgba(0,0,0,.1);color:#333;font-weight:600}
 .hdr-sub{color:#555;font-size:.7rem;margin-top:2px}
-
 .nav{display:flex;background:#1a1a1a;overflow-x:auto;position:sticky;top:58px;z-index:190;-webkit-overflow-scrolling:touch}
 .nav button{padding:10px 12px;background:none;border:none;color:#aaa;font-size:.76rem;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
 .nav button.active{color:#FFD700;border-bottom:3px solid #FFD700}
-
 .content{padding:12px;max-width:960px;margin:0 auto}
 .tab{display:none}.tab.active{display:block}
 .card{background:white;border-radius:10px;padding:15px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,.09)}
 .ct{color:#CC0000;font-size:.97rem;font-weight:800;margin-bottom:13px}
-
 .sbar{background:linear-gradient(135deg,#CC0000,#880000);color:white;padding:13px 15px;border-radius:10px;margin-bottom:12px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px}
 .si{text-align:center}.si .val{font-size:1.3rem;font-weight:900}.si .lbl{font-size:.67rem;opacity:.8;margin-top:2px}
-
 .sc{background:white;border-radius:10px;margin-bottom:11px;box-shadow:0 2px 6px rgba(0,0,0,.09);overflow:hidden;border-left:5px solid #FFD700}
 .sch{background:#FFF9E6;padding:11px 13px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #FFD700}
 .sch h3{color:#CC0000;font-size:.9rem;font-weight:800}
@@ -62,11 +54,9 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 .tdate{font-size:.7rem;color:#888;white-space:nowrap;min-width:56px;padding-top:2px}
 .ti{flex:1}.tv{font-size:.85rem;font-weight:700}.tp{font-size:.71rem;color:#777;margin-top:1px}
 .ta{font-size:.9rem;font-weight:800;color:#CC0000;white-space:nowrap}
-
 .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.67rem;font-weight:700;text-transform:uppercase}
 .bp{background:#FFF3CD;color:#7A5700;border:1px solid #FFD700}
 .bpa{background:#D1E7DD;color:#0A3622;border:1px solid #A3CFBB}
-
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .rt{width:100%;border-collapse:collapse;font-size:.74rem;min-width:680px}
 .rt thead tr{background:#FFD700}
@@ -79,11 +69,9 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 .mrc-v{font-weight:800;font-size:.86rem}.mrc-a{font-weight:900;font-size:.95rem;color:#CC0000}
 .mrc-m{font-size:.72rem;color:#777;margin-bottom:3px}
 .mrc-f{display:flex;justify-content:space-between;align-items:center;margin-top:7px}
-
 .split-box{background:#FFFDE7;border:2px dashed #FFD700;border-radius:8px;padding:11px;margin-top:4px}
 .sr-item{display:grid;grid-template-columns:1fr auto auto;gap:8px;margin-bottom:8px;align-items:end}
 .sr-item .fg{margin-bottom:0}
-
 .mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:14px}
 .mo.open{display:flex}
 .md{background:white;border-radius:14px;padding:20px;width:100%;max-width:460px;max-height:92vh;overflow-y:auto;box-shadow:0 8px 30px rgba(0,0,0,.3)}
@@ -92,28 +80,23 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 .md-row{display:flex;justify-content:space-between;padding:3px 0;font-size:.84rem}
 .md-tot{display:flex;justify-content:space-between;padding:7px 0 0;margin-top:5px;border-top:2px solid #FFD700;font-size:1.05rem;font-weight:800;color:#CC0000}
 .md-foot{display:flex;gap:8px;margin-top:14px}
-
 .alert{padding:9px 13px;border-radius:7px;margin-bottom:11px;font-size:.84rem;animation:fadeIn .3s}
 .as{background:#D1E7DD;color:#0A3622;border:1px solid #A3CFBB}
 .aw{background:#FFF3CD;color:#7A5700;border:1px solid #FFDA6A}
 .ae{background:#F8D7DA;color:#842029;border:1px solid #F5C2C7}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
-
 .ia{width:100%;min-height:100px;font-family:monospace;font-size:.79rem;padding:10px;border:2px solid #ddd;border-radius:7px;resize:vertical}
 .icard{background:#f9f9f9;border-radius:8px;padding:11px;margin-bottom:9px;border-left:4px solid #FFD700}
 .fbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .fbar select,.fbar input{padding:8px 10px;border:2px solid #ddd;border-radius:7px;font-size:.79rem;flex:1;min-width:90px;background:white}
-
 .phi{border:1px solid #eee;border-radius:8px;padding:10px 12px;margin-bottom:8px;background:#F0FFF4}
 .phi-h{display:flex;justify-content:space-between;font-weight:800;font-size:.88rem}
 .phi-d{font-size:.71rem;color:#555;margin-top:3px}
-
 #loading{position:fixed;inset:0;background:#FFD700;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:14px}
 #loading .spin{font-size:2.5rem;animation:spin 1s linear infinite}
 #loading p{font-size:1rem;font-weight:800;color:#CC0000}
 #loading small{font-size:.75rem;color:#555}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 #screen-cpa{background:white;min-height:100vh}
 .cpa-tb{background:#1a1a1a;padding:10px 15px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;position:sticky;top:0;z-index:100}
 .cpa-tb h2{color:#FFD700;font-size:.95rem;font-weight:800;flex:1}
@@ -134,7 +117,6 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 .cpa-tx tr:hover{background:#f9f9f9}.cpa-tx tr.cpr{background:#F0FFF4}
 .cpa-ft{margin-top:28px;padding-top:13px;border-top:2px solid #ddd;font-size:.73rem;color:#aaa;text-align:center}
 @media print{.cpa-tb{display:none!important}.cpa-body{padding:8px}@page{margin:14mm}}
-
 .es{text-align:center;padding:36px 20px;color:#999}.es .ei{font-size:2rem;margin-bottom:8px}
 @media(max-width:600px){.content{padding:10px}.fr{grid-template-columns:1fr}.cpa-body{padding:14px}}
 </style>
@@ -145,7 +127,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 <div id="loading">
   <div class="spin">💳</div>
   <p>Capital One Tracker</p>
-  <small>Loading from Google Sheets...</small>
+  <small>Connecting...</small>
 </div>
 
 <!-- SCREEN: LOGIN -->
@@ -267,7 +249,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
   <!-- PAY -->
   <div id="tab-pay" class="tab">
     <div class="card" style="background:#FFF9E6;">
-      <p style="font-size:.82rem;color:#555;">Select a store below, enter the Capital One confirmation number, and mark it paid.</p>
+      <p style="font-size:.82rem;color:#555;">Select a store, check which charges to pay, enter the Capital One confirmation number.</p>
     </div>
     <div id="pay-body"></div>
   </div>
@@ -279,32 +261,29 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 
   <!-- IMPORT -->
   <div id="tab-import" class="tab">
-
-   <!-- METHOD 1: CSV Upload -->
    <div class="card">
     <div class="ct">📂 Upload Capital One CSV</div>
     <p style="font-size:.8rem;color:#555;margin-bottom:12px;">
-      Download your statement from <strong>capitalone.com</strong> → Transactions → Download → CSV.<br>
-      Upload it here. Charges only — payments and credits are skipped automatically.
+      Download from <strong>capitalone.com</strong> → Transactions → Download → CSV.<br>
+      Payments and credits are skipped automatically.
     </p>
-    <label id="csv-drop" style="display:flex;flex-direction:column;align-items:center;justify-content:center;
+    <div id="csv-drop" style="display:flex;flex-direction:column;align-items:center;justify-content:center;
       border:3px dashed #FFD700;border-radius:12px;padding:28px;cursor:pointer;background:#FFFDE7;
       transition:background .15s;gap:8px;" ondragover="event.preventDefault();this.style.background='#FFF3CD'"
-      ondragleave="this.style.background='#FFFDE7'" ondrop="dropCSV(event)">
+      ondragleave="this.style.background='#FFFDE7'" ondrop="dropCSV(event)"
+      onclick="document.getElementById('csv-file').click()">
       <span style="font-size:2rem;">📄</span>
       <span style="font-weight:700;color:#CC0000;font-size:.9rem;">Click to choose CSV file</span>
       <span style="font-size:.74rem;color:#888;">or drag &amp; drop your Capital One export here</span>
       <input type="file" id="csv-file" accept=".csv" style="display:none" onchange="readCSV(this.files[0])">
-    </label>
+    </div>
     <div id="csv-status" style="margin-top:8px;font-size:.78rem;color:#555;"></div>
    </div>
-
-   <!-- METHOD 2: Paste -->
    <div class="card">
     <div class="ct">📋 Or Paste Transactions</div>
     <p style="font-size:.8rem;color:#555;margin-bottom:9px;">
-      Copy rows from Capital One website and paste below.<br>
-      Accepts tab-separated or comma-separated: <code style="background:#f5f5f5;padding:1px 5px;border-radius:4px;font-size:.74rem;color:#CC0000;">MM/DD/YYYY &nbsp; Vendor &nbsp; Amount</code>
+      Paste charges only (tab or comma separated):<br>
+      <code style="background:#f5f5f5;padding:1px 5px;border-radius:4px;font-size:.74rem;color:#CC0000;">MM/DD/YYYY &nbsp; Vendor &nbsp; Amount</code>
     </p>
     <textarea id="imp-text" class="ia" placeholder="01/24/2026&#9;Target&#9;46.78&#10;01/29/2026&#9;Dollar General&#9;27.83"></textarea>
     <div style="margin-top:9px;display:flex;gap:8px;flex-wrap:wrap;">
@@ -312,8 +291,6 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
       <button class="btn btn-gray btn-sm" onclick="document.getElementById('imp-text').value='';document.getElementById('imp-prev').innerHTML=''">Clear</button>
     </div>
    </div>
-
-   <!-- PREVIEW GRID (shared by both methods) -->
    <div id="imp-prev"></div>
   </div>
 
@@ -376,9 +353,9 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 </div>
 
 <script>
-/* ════════════════════════════════════
-   HARDCODED CONFIG — no setup screen
-════════════════════════════════════ */
+/* ══════════════════════════════════
+   HARDCODED CONFIG
+══════════════════════════════════ */
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzq-6jf1pjfKnWJN79fcocmJUAUWEctOh5ParXCA2_Xeoe2Rem29ftwJVXyHjRKg6C3/exec';
 const API_TOKEN  = 'CAP1-HARRY-977381';
 const PASS_B64   = 'OTc3Mzgx'; // btoa('977381')
@@ -406,7 +383,6 @@ let txns=[], pmts=[], authed=false, splitCnt=0, saveTimer=null;
 
 /* ── BOOT ── */
 window.addEventListener('load', () => {
-  // Go straight to login — no setup screen ever
   document.getElementById('loading').style.display = 'none';
   showScr('screen-login');
   document.getElementById('login-pw').focus();
@@ -439,12 +415,15 @@ function login(){
 
 function logout(){ authed=false; txns=[]; pmts=[]; showScr('screen-login'); }
 
-/* ── DATA SYNC ── */
+/* ── DATA SYNC with 8-second timeout ── */
 async function loadData(){
   showScr('screen-app');
-  setSyn('loading','🔄 Loading from Sheets...');
+  setSyn('loading','🔄 Loading...');
   try {
-    const res  = await fetch(`${SCRIPT_URL}?token=${encodeURIComponent(API_TOKEN)}`);
+    const controller = new AbortController();
+    const timer = setTimeout(()=>controller.abort(), 8000);
+    const res = await fetch(`${SCRIPT_URL}?token=${encodeURIComponent(API_TOKEN)}`,{signal:controller.signal});
+    clearTimeout(timer);
     if(!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
     if(json.error) throw new Error(json.error);
@@ -452,35 +431,38 @@ async function loadData(){
     pmts = json.payments || [];
     setSyn('ok','✅ Google Sheets');
   } catch(e){
-    // Fall back to local cache if Sheets unreachable
     txns = JSON.parse(localStorage.getItem('cap1_txns')||'[]');
     pmts = JSON.parse(localStorage.getItem('cap1_pmts')||'[]');
-    setSyn('err','⚠️ Offline — showing local copy');
+    const msg = e.name==='AbortError' ? '⚠️ Sheets timeout — local copy' : '⚠️ Offline — local copy';
+    setSyn('err', msg);
   }
   authed = true;
   initApp();
 }
 
 async function persist(){
-  // Always write local backup
   localStorage.setItem('cap1_txns', JSON.stringify(txns));
   localStorage.setItem('cap1_pmts', JSON.stringify(pmts));
   updateSub();
   clearTimeout(saveTimer);
-  setSyn('saving','🔄 Saving to Sheets...');
+  setSyn('saving','🔄 Saving...');
   saveTimer = setTimeout(async()=>{
     try {
-      const res  = await fetch(SCRIPT_URL,{
+      const controller = new AbortController();
+      const timer = setTimeout(()=>controller.abort(), 10000);
+      const res = await fetch(SCRIPT_URL,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({token:API_TOKEN, txns, payments:pmts})
+        body:JSON.stringify({token:API_TOKEN, txns, payments:pmts}),
+        signal:controller.signal
       });
+      clearTimeout(timer);
       if(!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       if(json.error) throw new Error(json.error);
       setSyn('ok','✅ Saved to Sheets');
     } catch(e){
-      setSyn('err','⚠️ Saved locally — Sheets sync failed');
+      setSyn('err','⚠️ Saved locally only');
     }
   },800);
 }
@@ -525,7 +507,7 @@ function updateSub(){
   const pend=txns.filter(t=>t.status==='PENDING');
   const tot=pend.reduce((s,t)=>s+t.amount,0);
   const el=document.getElementById('hdr-sub');
-  if(el) el.textContent=`☁️ Google Sheets · ${pend.length} pending · $${fmt(tot)} due`;
+  if(el) el.textContent=`☁️ ${pend.length} pending · $${fmt(tot)} due`;
 }
 
 /* ── SPLIT ── */
@@ -715,44 +697,53 @@ function renderPay(){
         <div class="acct">${st&&st.ba?'Pay from: '+st.ba+' · ':''} ${count} charge${count!==1?'s':''}</div></div>
       <div class="sch-r">
         <div class="stot">$${fmt(total)}</div>
-        <button class="btn btn-green btn-sm" onclick="openPayModal('${sk}')" style="margin-top:5px;">✅ Mark Paid</button>
+        <button class="btn btn-green btn-sm" onclick="openPayModal('${sk}')" style="margin-top:5px;">✅ Select & Pay</button>
       </div>
     </div></div>`;
   }).join('');
 }
 
-/* ── PAY MODAL ── */
+/* ── PAY MODAL — with checkboxes ── */
 let actSK=null, actPend=[];
+
 function openPayModal(sk){
-  actSK=sk; const store=SM[sk];
+  actSK=sk;
+  const store=SM[sk];
   actPend=txns.filter(t=>t.status==='PENDING'&&t.stores.some(s=>s.storeKey===sk));
   const total=actPend.reduce((s,t)=>{const si=t.stores.find(x=>x.storeKey===sk);return s+(si?.amount||0);},0);
+
   document.getElementById('mp-title').textContent=`Pay — ${store?store.name:sk}`;
   document.getElementById('mp-sum').innerHTML=
-    `<p style="font-size:.72rem;color:#888;margin-bottom:8px;">Check the transactions you want to pay now:</p>`+
+    `<p style="font-size:.72rem;color:#888;margin-bottom:9px;font-weight:600;">✔ Check the transactions to include in this payment:</p>`+
     actPend.map((t,i)=>{
       const si=t.stores.find(x=>x.storeKey===sk);
       const amt=si?.amount||0;
-      return `<div style="display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid #f0f0f0;">
+      return `<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;">
         <input type="checkbox" id="pck-${i}" data-amt="${amt}" checked
-          onchange="recalcPayTotal()" style="width:17px;height:17px;margin-top:2px;accent-color:#CC0000;cursor:pointer;flex-shrink:0;">
-        <div style="flex:1;">
-          <div style="font-size:.84rem;font-weight:700;">${esc(t.chargedBy)}</div>
+          onchange="recalcPayTotal()"
+          style="width:18px;height:18px;margin-top:3px;accent-color:#CC0000;cursor:pointer;flex-shrink:0;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:.85rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(t.chargedBy)}</div>
           <div style="font-size:.7rem;color:#888;">${fd(t.postedDate)} · ${esc(t.purpose)}</div>
         </div>
-        <strong style="color:#CC0000;white-space:nowrap;">$${fmt(amt)}</strong>
+        <strong style="color:#CC0000;white-space:nowrap;padding-top:2px;">$${fmt(amt)}</strong>
       </div>`;
     }).join('')+
-    `<div class="md-tot" style="margin-top:6px;"><span>SELECTED TOTAL</span><span id="mp-sel-tot">$${fmt(total)}</span></div>
-     <div class="md-row" style="margin-top:7px;font-size:.76rem;color:#666;">
-       <span>Pay from:</span><strong>${store?store.ba:'—'}</strong></div>`;
+    `<div class="md-tot" style="margin-top:8px;">
+       <span>SELECTED TOTAL</span><span id="mp-sel-tot">$${fmt(total)}</span>
+     </div>
+     <div style="font-size:.73rem;color:#777;margin-top:6px;">
+       Pay from: <strong>${store?store.ba:'—'}</strong>
+     </div>`;
+
   document.getElementById('mp-date').value=today();
   document.getElementById('mp-total').value=total.toFixed(2);
   document.getElementById('mp-conf').value='';
   document.getElementById('mp-note').value=`$${fmt(total)} paid via ${store?store.name:sk} ops acc`;
   openModal('mo-pay');
 }
-  function recalcPayTotal(){
+
+function recalcPayTotal(){
   const store=SM[actSK];
   let total=0;
   actPend.forEach((_,i)=>{
@@ -764,19 +755,21 @@ function openPayModal(sk){
   document.getElementById('mp-total').value=total.toFixed(2);
   document.getElementById('mp-note').value=`$${fmt(total)} paid via ${store?store.name:actSK} ops acc`;
 }
-}
+
 function confirmPay(){
   const payoffDate=document.getElementById('mp-date').value;
   const conf=document.getElementById('mp-conf').value.trim().toUpperCase();
   const totalPaid=parseFloat(document.getElementById('mp-total').value);
   const note=document.getElementById('mp-note').value.trim();
   if(!payoffDate||!conf){alert('Enter Payoff Date and Confirmation Number.');return;}
+
   const selectedIds=[];
   actPend.forEach((t,i)=>{
     const cb=document.getElementById(`pck-${i}`);
     if(cb&&cb.checked) selectedIds.push(t.id);
   });
-  if(!selectedIds.length){alert('Select at least one transaction.');return;}
+  if(!selectedIds.length){alert('Select at least one transaction to pay.');return;}
+
   const pmt={id:uid(),storeKey:actSK,payoffDate,totalPaid,confirmationNumber:conf,
     payNote:note,createdAt:new Date().toISOString(),transactionIds:[]};
   txns.forEach(t=>{
@@ -834,7 +827,6 @@ function confirmUndo(){
 /* ── IMPORT ── */
 let impRows=[];
 
-// ── CSV file upload (drag or click)
 function dropCSV(e){
   e.preventDefault();
   document.getElementById('csv-drop').style.background='#FFFDE7';
@@ -843,16 +835,14 @@ function dropCSV(e){
   else document.getElementById('csv-status').textContent='⚠️ Please drop a .csv file.';
 }
 
-
 function readCSV(file){
   if(!file) return;
+  // Reset file input so same file can be re-selected
+  document.getElementById('csv-file').value='';
   const statusEl=document.getElementById('csv-status');
   statusEl.textContent='⏳ Reading file...';
   const reader=new FileReader();
-  reader.onload=e=>{
-    const text=e.target.result;
-    parseCapOneCSV(text);
-  };
+  reader.onload=e=>{ parseCapOneCSV(e.target.result); };
   reader.onerror=()=>{ statusEl.textContent='❌ Could not read file.'; };
   reader.readAsText(file);
 }
@@ -862,28 +852,21 @@ function parseCapOneCSV(text){
   const lines=text.split('\n').map(l=>l.trim()).filter(Boolean);
   if(!lines.length){ statusEl.textContent='⚠️ File is empty.'; return; }
 
-  // Detect Capital One format by checking header
   const header=lines[0].toLowerCase();
   const isCapOne=header.includes('posted date')&&header.includes('description')&&header.includes('debit');
-
   impRows=[];
   let skipped=0;
 
   if(isCapOne){
-    // Parse Capital One CSV:
-    // Transaction Date, Posted Date, Card No., Description, Category, Debit, Credit
     const cols=lines[0].split(',').map(c=>c.trim().toLowerCase().replace(/"/g,''));
     const idxPosted = cols.findIndex(c=>c.includes('posted date'));
     const idxDesc   = cols.findIndex(c=>c==='description');
     const idxCat    = cols.findIndex(c=>c==='category');
     const idxDebit  = cols.findIndex(c=>c==='debit');
-    const idxCredit = cols.findIndex(c=>c==='credit');
 
     lines.slice(1).forEach(line=>{
       const parts=splitCSVLine(line);
-      const debit =parseFloat((parts[idxDebit]||'').replace(/[$,]/g,''));
-      const credit=parseFloat((parts[idxCredit]||'').replace(/[$,]/g,''));
-      // Skip payments/credits
+      const debit=parseFloat((parts[idxDebit]||'').replace(/[$,]/g,''));
       if(isNaN(debit)||debit<=0){ skipped++; return; }
       const rawDate=(parts[idxPosted]||'').replace(/"/g,'').trim();
       const desc   =(parts[idxDesc  ]||'').replace(/"/g,'').trim();
@@ -893,13 +876,12 @@ function parseCapOneCSV(text){
       else if(/\d{1,2}\/\d{1,2}\/\d{4}/.test(rawDate)){
         const[m,d,y]=rawDate.split('/');date=`${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
       } else { skipped++; return; }
-      impRows.push({date,desc,amount:debit,hint:cat,editable:true});
+      impRows.push({date,desc,amount:debit,hint:cat});
     });
     statusEl.textContent=`✅ Found ${impRows.length} charge${impRows.length!==1?'s':''} · ${skipped} payment/credit rows skipped`;
   } else {
-    // Generic CSV fallback
     lines.forEach((line,i)=>{
-      if(i===0&&line.toLowerCase().includes('date')) return; // skip header
+      if(i===0&&line.toLowerCase().includes('date')) return;
       const parts=splitCSVLine(line);
       if(parts.length<3) return;
       const rawDate=parts[0].replace(/"/g,'').trim();
@@ -912,20 +894,19 @@ function parseCapOneCSV(text){
       else if(/\d{1,2}\/\d{1,2}\/\d{4}/.test(rawDate)){
         const[m,d,y]=rawDate.split('/');date=`${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
       } else return;
-      impRows.push({date,desc:rawDesc,amount,hint:'',editable:true});
+      impRows.push({date,desc:rawDesc,amount,hint:''});
     });
     statusEl.textContent=`✅ Parsed ${impRows.length} row${impRows.length!==1?'s':''}`;
   }
 
   if(!impRows.length){
-    document.getElementById('imp-prev').innerHTML='<div class="alert aw">⚠️ No charges found. Make sure you are uploading a Capital One CSV with Debit amounts.</div>';
+    document.getElementById('imp-prev').innerHTML='<div class="alert aw">⚠️ No charges found. Make sure this is a Capital One CSV with Debit amounts.</div>';
     return;
   }
   renderImpPreview();
 }
 
 function splitCSVLine(line){
-  // Handles quoted fields with commas inside
   const result=[];let cur='';let inQ=false;
   for(let i=0;i<line.length;i++){
     const c=line[i];
@@ -937,7 +918,6 @@ function splitCSVLine(line){
   return result;
 }
 
-// ── Paste import (plain text)
 function parseImp(){
   const text=document.getElementById('imp-text').value.trim(); if(!text) return;
   const lines=text.split('\n').map(l=>l.trim()).filter(Boolean);
@@ -955,13 +935,12 @@ function parseImp(){
     if(/\d{1,2}\/\d{1,2}\/\d{4}/.test(rawDate)){
       const[m,d,y]=rawDate.split('/');date=`${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
     } else if(/\d{4}-\d{2}-\d{2}/.test(rawDate)){date=rawDate;} else return;
-    impRows.push({date,desc:rawDesc,amount:Math.abs(amount),hint:'',editable:true});
+    impRows.push({date,desc:rawDesc,amount:Math.abs(amount),hint:''});
   });
   if(!impRows.length){document.getElementById('imp-prev').innerHTML='<div class="alert aw">⚠️ Could not parse. Check format.</div>';return;}
   renderImpPreview();
 }
 
-// ── Shared preview renderer
 function renderImpPreview(){
   if(!impRows.length) return;
   const sopts='<option value="">-- Select Store --</option>'+STORES.map(s=>`<option value="${s.key}">${s.name}</option>`).join('');
@@ -989,8 +968,7 @@ function renderImpPreview(){
             style="width:80px;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.9rem;font-weight:800;color:#CC0000;text-align:right;">
         </div>
         <button onclick="removeImpRow(${i})"
-          style="background:none;border:none;cursor:pointer;color:#ccc;font-size:1.1rem;padding:4px;margin-top:18px;flex-shrink:0;"
-          title="Remove this row">✕</button>
+          style="background:none;border:none;cursor:pointer;color:#ccc;font-size:1.1rem;padding:4px;margin-top:18px;flex-shrink:0;">✕</button>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;">
         <div>
@@ -1005,7 +983,7 @@ function renderImpPreview(){
       </div>
       <div>
         <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">
-          Purpose * ${r.hint?`<span style="font-weight:400;color:#aaa;">(suggested: ${esc(r.hint)})</span>`:''}
+          Purpose * ${r.hint?`<span style="font-weight:400;color:#aaa;">(${esc(r.hint)})</span>`:''}
         </div>
         <input type="text" id="ip-${i}" placeholder="What is this charge for?"
           style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.83rem;">
@@ -1017,9 +995,7 @@ function renderImpPreview(){
   document.getElementById('imp-prev').innerHTML=html;
 }
 
-function removeImpRow(i){
-  document.getElementById(`irow-${i}`)?.remove();
-}
+function removeImpRow(i){ document.getElementById(`irow-${i}`)?.remove(); }
 
 function clearImp(){
   impRows=[];
@@ -1029,34 +1005,33 @@ function clearImp(){
 }
 
 function impAll(){
-  // Collect from rendered inputs (some rows may have been deleted)
   let cnt=0,skipped=0;
   impRows.forEach((_,i)=>{
     const row=document.getElementById(`irow-${i}`);
-    if(!row) return; // user removed it
-    const desc=document.getElementById(`id-${i}`)?.value.trim();
+    if(!row) return;
+    const desc  =document.getElementById(`id-${i}`)?.value.trim();
     const amount=parseFloat(document.getElementById(`ia-${i}`)?.value);
-    const date=document.getElementById(`idt-${i}`)?.value;
-    const sk=document.getElementById(`is-${i}`)?.value;
-    const pu=document.getElementById(`ip-${i}`)?.value.trim();
+    const date  =document.getElementById(`idt-${i}`)?.value;
+    const sk    =document.getElementById(`is-${i}`)?.value;
+    const pu    =document.getElementById(`ip-${i}`)?.value.trim();
     if(!sk||!pu||!desc||!date||isNaN(amount)||amount<=0){ skipped++; return; }
     txns.push({id:uid(),postedDate:date,chargedBy:desc,amount,purpose:pu,notes:'',
       stores:[{storeKey:sk,amount}],status:'PENDING',paymentId:null,createdAt:new Date().toISOString()});
     cnt++;
   });
   if(skipped>0&&cnt===0){
-    alert(`⚠️ ${skipped} row${skipped!==1?'s':''} missing Store or Purpose. Fill them in before posting.`);
+    alert(`⚠️ ${skipped} row${skipped!==1?'s':''} missing Store or Purpose. Fill them in first.`);
     return;
   }
   persist();
   document.getElementById('imp-text').value='';
   document.getElementById('csv-status').textContent='';
   document.getElementById('imp-prev').innerHTML=
-    `<div class="alert as">✅ Posted ${cnt} transaction${cnt!==1?'s':''}${skipped?` · ${skipped} skipped (no store/purpose)`:''}!</div>`;
+    `<div class="alert as">✅ Posted ${cnt} transaction${cnt!==1?'s':''}${skipped?` · ${skipped} skipped`:''}!</div>`;
   impRows=[];
 }
 
-/* ── CSV ── */
+/* ── EXPORT CSV ── */
 function exportCSV(){
   const fs=document.getElementById('flt-store').value;
   const fst=document.getElementById('flt-stat').value;
@@ -1157,7 +1132,7 @@ function renderCPA(){
 function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(){
   document.querySelectorAll('.mo').forEach(m=>m.classList.remove('open'));
-  actSK=delId=undoId=null;
+  actSK=null; actPend=[]; delId=null; undoId=null;
 }
 document.querySelectorAll('.mo').forEach(el=>{
   el.addEventListener('click',e=>{ if(e.target===el) closeModal(); });

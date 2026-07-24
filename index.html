@@ -725,14 +725,25 @@ function renderPay(){
 let actSK=null, actPend=[];
 function openPayModal(sk){
   actSK=sk; const store=SM[sk];
-  const pend=txns.filter(t=>t.status==='PENDING'&&t.stores.some(s=>s.storeKey===sk));
-  const total=pend.reduce((s,t)=>{const si=t.stores.find(x=>x.storeKey===sk);return s+(si?.amount||0);},0);
+  actPend=txns.filter(t=>t.status==='PENDING'&&t.stores.some(s=>s.storeKey===sk));
+  const total=actPend.reduce((s,t)=>{const si=t.stores.find(x=>x.storeKey===sk);return s+(si?.amount||0);},0);
   document.getElementById('mp-title').textContent=`Pay — ${store?store.name:sk}`;
   document.getElementById('mp-sum').innerHTML=
-    pend.map(t=>{const si=t.stores.find(x=>x.storeKey===sk);
-      return `<div class="md-row"><span>${esc(t.chargedBy)}</span><strong>$${fmt(si?.amount||0)}</strong></div>`;
+    `<p style="font-size:.72rem;color:#888;margin-bottom:8px;">Check the transactions you want to pay now:</p>`+
+    actPend.map((t,i)=>{
+      const si=t.stores.find(x=>x.storeKey===sk);
+      const amt=si?.amount||0;
+      return `<div style="display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid #f0f0f0;">
+        <input type="checkbox" id="pck-${i}" data-amt="${amt}" checked
+          onchange="recalcPayTotal()" style="width:17px;height:17px;margin-top:2px;accent-color:#CC0000;cursor:pointer;flex-shrink:0;">
+        <div style="flex:1;">
+          <div style="font-size:.84rem;font-weight:700;">${esc(t.chargedBy)}</div>
+          <div style="font-size:.7rem;color:#888;">${fd(t.postedDate)} · ${esc(t.purpose)}</div>
+        </div>
+        <strong style="color:#CC0000;white-space:nowrap;">$${fmt(amt)}</strong>
+      </div>`;
     }).join('')+
-    `<div class="md-tot"><span>TOTAL DUE</span><span>$${fmt(total)}</span></div>
+    `<div class="md-tot" style="margin-top:6px;"><span>SELECTED TOTAL</span><span id="mp-sel-tot">$${fmt(total)}</span></div>
      <div class="md-row" style="margin-top:7px;font-size:.76rem;color:#666;">
        <span>Pay from:</span><strong>${store?store.ba:'—'}</strong></div>`;
   document.getElementById('mp-date').value=today();
@@ -740,6 +751,7 @@ function openPayModal(sk){
   document.getElementById('mp-conf').value='';
   document.getElementById('mp-note').value=`$${fmt(total)} paid via ${store?store.name:sk} ops acc`;
   openModal('mo-pay');
+}
 }
 function confirmPay(){
   const payoffDate=document.getElementById('mp-date').value;

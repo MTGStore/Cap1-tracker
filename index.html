@@ -722,7 +722,7 @@ function renderPay(){
 }
 
 /* ── PAY MODAL ── */
-let actSK=null;
+let actSK=null, actPend=[];
 function openPayModal(sk){
   actSK=sk; const store=SM[sk];
   const pend=txns.filter(t=>t.status==='PENDING'&&t.stores.some(s=>s.storeKey===sk));

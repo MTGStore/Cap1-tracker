@@ -1038,54 +1038,81 @@ function parseImp(){
   if(!impRows.length){document.getElementById('imp-prev').innerHTML='<div class="alert aw">⚠️ Could not parse. Check format.</div>';return;}
   renderImpPreview();
 }
+function isDuplicate(r){
+  return txns.some(t=>{
+    const sameDate = t.postedDate === r.date;
+    const sameAmt  = Math.abs(t.amount - r.amount) < 0.02;
+    const sameDesc = t.chargedBy.trim().toLowerCase() === r.desc.trim().toLowerCase();
+    return sameDate && sameAmt && sameDesc;
+  });
+}
+
 function renderImpPreview(){
   if(!impRows.length) return;
   const sopts='<option value="">-- Select Store --</option>'+getAllStores().map(s=>`<option value="${s.key}">${s.name}</option>`).join('');
+  const dupCount = impRows.filter(r=>isDuplicate(r)).length;
+  const newCount = impRows.length - dupCount;
   let html=`<div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;flex-wrap:wrap;gap:8px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
       <div class="ct" style="margin-bottom:0;">Review &amp; Edit (${impRows.length} charge${impRows.length!==1?'s':''})</div>
       <div style="display:flex;gap:7px;">
-        <button class="btn btn-green btn-sm" onclick="impAll()">✅ Post All</button>
+        <button class="btn btn-green btn-sm" onclick="impAll()">✅ Post Checked</button>
         <button class="btn btn-gray btn-sm" onclick="clearImp()">✕ Clear</button>
       </div>
-    </div>`;
+    </div>
+    ${dupCount>0?`<div style="background:#FFF3CD;border:1px solid #FFD700;border-radius:7px;padding:9px 12px;margin-bottom:11px;font-size:.8rem;color:#7A5700;">
+      ⚠️ <strong>${dupCount} possible duplicate${dupCount!==1?'s':''}</strong> found (unchecked by default) ·
+      <strong style="color:#198754;">${newCount} new</strong> charge${newCount!==1?'s':''} ready to post
+    </div>`:''}`;
   impRows.forEach((r,i)=>{
-    html+=`<div class="icard" id="irow-${i}">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:9px;">
+    const dup = isDuplicate(r);
+    const cardBg = dup ? '#FFF8F8' : '#f9f9f9';
+    const cardBorder = dup ? '#CC0000' : '#FFD700';
+    html+=`<div class="icard" id="irow-${i}" style="background:${cardBg};border-left-color:${cardBorder};">
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:9px;">
+        <input type="checkbox" id="ichk-${i}" ${dup?'':'checked'}
+          style="width:18px;height:18px;margin-top:20px;accent-color:#CC0000;cursor:pointer;flex-shrink:0;">
         <div style="flex:1;">
-          <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">Description</div>
-          <input type="text" id="id-${i}" value="${esc(r.desc)}"
-            style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.84rem;font-weight:600;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:9px;">
+            <div style="flex:1;">
+              <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;display:flex;align-items:center;gap:6px;">
+                Description
+                ${dup?`<span style="background:#F8D7DA;color:#842029;border:1px solid #F5C2C7;border-radius:4px;padding:1px 6px;font-size:.62rem;font-weight:800;">⚠️ DUPLICATE</span>`:''}
+              </div>
+              <input type="text" id="id-${i}" value="${esc(r.desc)}"
+                style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.84rem;font-weight:600;">
+            </div>
+            <div style="text-align:right;min-width:80px;">
+              <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">Amount</div>
+              <input type="number" id="ia-${i}" value="${r.amount.toFixed(2)}" step="0.01" min="0.01" inputmode="decimal"
+                style="width:80px;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.9rem;font-weight:800;color:#CC0000;text-align:right;">
+            </div>
+            <button onclick="removeImpRow(${i})"
+              style="background:none;border:none;cursor:pointer;color:#ccc;font-size:1.1rem;padding:4px;margin-top:18px;flex-shrink:0;">✕</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;">
+            <div>
+              <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">Posted Date</div>
+              <input type="date" id="idt-${i}" value="${r.date}"
+                style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.83rem;">
+            </div>
+            <div>
+              <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">Store *</div>
+              <select id="is-${i}" style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.83rem;">${sopts}</select>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">
+              Purpose * ${r.hint?`<span style="font-weight:400;color:#aaa;">(${esc(r.hint)})</span>`:''}
+            </div>
+            <input type="text" id="ip-${i}" placeholder="What is this charge for?"
+              style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.83rem;">
+          </div>
         </div>
-        <div style="text-align:right;min-width:80px;">
-          <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">Amount</div>
-          <input type="number" id="ia-${i}" value="${r.amount.toFixed(2)}" step="0.01" min="0.01" inputmode="decimal"
-            style="width:80px;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.9rem;font-weight:800;color:#CC0000;text-align:right;">
-        </div>
-        <button onclick="removeImpRow(${i})"
-          style="background:none;border:none;cursor:pointer;color:#ccc;font-size:1.1rem;padding:4px;margin-top:18px;flex-shrink:0;">✕</button>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;">
-        <div>
-          <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">Posted Date</div>
-          <input type="date" id="idt-${i}" value="${r.date}"
-            style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.83rem;">
-        </div>
-        <div>
-          <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">Store *</div>
-          <select id="is-${i}" style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.83rem;">${sopts}</select>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:.67rem;font-weight:700;color:#CC0000;text-transform:uppercase;margin-bottom:3px;">
-          Purpose * ${r.hint?`<span style="font-weight:400;color:#aaa;">(${esc(r.hint)})</span>`:''}
-        </div>
-        <input type="text" id="ip-${i}" placeholder="What is this charge for?"
-          style="width:100%;padding:7px 9px;border:2px solid #ddd;border-radius:6px;font-size:.83rem;">
       </div>
     </div>`;
   });
-  html+=`<button class="btn btn-green btn-full" onclick="impAll()" style="margin-top:8px;">✅ Post ${impRows.length} Transaction${impRows.length!==1?'s':''}</button></div>`;
+  html+=`<button class="btn btn-green btn-full" onclick="impAll()" style="margin-top:8px;">✅ Post Checked Transactions</button></div>`;
   document.getElementById('imp-prev').innerHTML=html;
 }
 function removeImpRow(i){ document.getElementById(`irow-${i}`)?.remove(); }
@@ -1096,9 +1123,11 @@ function clearImp(){
   document.getElementById('csv-status').textContent='';
 }
 function impAll(){
-  let cnt=0,skipped=0;
+  let cnt=0, skipped=0, unchecked=0;
   impRows.forEach((_,i)=>{
-    const row=document.getElementById(`irow-${i}`); if(!row) return;
+    const row =document.getElementById(`irow-${i}`); if(!row) return;
+    const chk =document.getElementById(`ichk-${i}`);
+    if(chk && !chk.checked){ unchecked++; return; } // skip unchecked (duplicates)
     const desc  =document.getElementById(`id-${i}`)?.value.trim();
     const amount=parseFloat(document.getElementById(`ia-${i}`)?.value);
     const date  =document.getElementById(`idt-${i}`)?.value;
@@ -1110,11 +1139,14 @@ function impAll(){
     cnt++;
   });
   if(skipped>0&&cnt===0){alert(`⚠️ ${skipped} row${skipped!==1?'s':''} missing Store or Purpose.`);return;}
+  if(cnt===0&&unchecked>0){alert('All rows are unchecked (duplicates). Check any you want to import.');return;}
   persist();
   document.getElementById('imp-text').value='';
   document.getElementById('csv-status').textContent='';
-  document.getElementById('imp-prev').innerHTML=
-    `<div class="alert as">✅ Posted ${cnt} transaction${cnt!==1?'s':''}${skipped?` · ${skipped} skipped`:''}!</div>`;
+  const parts=[`✅ Posted ${cnt} new transaction${cnt!==1?'s':''}`];
+  if(unchecked>0) parts.push(`${unchecked} duplicate${unchecked!==1?'s':''} skipped`);
+  if(skipped>0)   parts.push(`${skipped} incomplete row${skipped!==1?'s':''} skipped`);
+  document.getElementById('imp-prev').innerHTML=`<div class="alert as">${parts.join(' · ')}</div>`;
   impRows=[];
 }
 

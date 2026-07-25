@@ -153,7 +153,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
      </div>
      <div class="err" id="login-err">Incorrect password. Please try again.</div>
    </div>
-   <button class="btn btn-red btn-full" onclick="login()">Unlock →</button>
+   <button class="btn btn-red btn-full" id="login-btn" onclick="login()">Unlock →</button>
    <p style="text-align:center;font-size:.7rem;color:#ccc;margin-top:14px;">Harry Desai · Capital One SQS Card</p>
   </div>
  </div>
@@ -366,8 +366,6 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 <div class="mo" id="mo-stores">
  <div class="md" style="max-width:500px;">
   <div class="md-title">🏪 Store Manager</div>
-
-  <!-- Add new store form -->
   <div style="background:#FFF9E6;border:2px solid #FFD700;border-radius:9px;padding:13px;margin-bottom:14px;">
     <div style="font-size:.78rem;font-weight:800;color:#CC0000;margin-bottom:10px;text-transform:uppercase;">➕ Add New Store</div>
     <div class="fg" style="margin-bottom:9px;">
@@ -381,11 +379,8 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
     <button class="btn btn-red btn-full" onclick="addNewStore()" style="padding:10px;">➕ Add Store</button>
     <div id="ns-err" class="err" style="margin-top:6px;"></div>
   </div>
-
-  <!-- Existing stores list -->
   <div style="font-size:.78rem;font-weight:800;color:#555;margin-bottom:8px;text-transform:uppercase;">All Stores</div>
   <div id="store-list" style="max-height:340px;overflow-y:auto;"></div>
-
   <div class="md-foot" style="margin-top:12px;">
     <button class="btn btn-gray btn-sm" style="flex:1;" onclick="closeModal()">Close</button>
   </div>
@@ -394,11 +389,10 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;color:#222;-webkit-tap-high
 
 <script>
 /* ══════════════════════════════
-   CONFIG
+   CONFIG  —  no password stored here
 ══════════════════════════════ */
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzq-6jf1pjfKnWJN79fcocmJUAUWEctOh5ParXCA2_Xeoe2Rem29ftwJVXyHjRKg6C3/exec';
-const API_TOKEN  = 'CAP1-HARRY-977381';
-const PASS_B64   = 'OTc3Mzgx'; // btoa('977381')
+const API_TOKEN  = 'CAP1-HARRY-2026-XK9M'; // must match Apps Script TOKEN
 
 /* ── DEFAULT STORES ── */
 const DEFAULT_STORES = [
@@ -420,17 +414,10 @@ const DEFAULT_STORES = [
   {key:'HARRY',    name:'Harry (Personal)',       ba:'Harry Wfargo / Truist'},
 ];
 
-/* ── CUSTOM STORES (saved in localStorage) ── */
 let customStores = JSON.parse(localStorage.getItem('cap1_custom_stores') || '[]');
-
-/* ── STORE MAP (rebuilt on every change) ── */
 let SM = {};
-function rebuildSM(){
-  SM = Object.fromEntries(getAllStores().map(s=>[s.key,s]));
-}
-function getAllStores(){
-  return [...DEFAULT_STORES, ...customStores];
-}
+function rebuildSM(){ SM = Object.fromEntries(getAllStores().map(s=>[s.key,s])); }
+function getAllStores(){ return [...DEFAULT_STORES, ...customStores]; }
 rebuildSM();
 
 let txns=[], pmts=[], authed=false, splitCnt=0, saveTimer=null;
@@ -447,27 +434,56 @@ function showScr(id){
   document.getElementById(id).classList.add('active');
 }
 
-/* ══ AUTH ══ */
+/* ══ AUTH — server-side check ══ */
 function togVis(id,btn){
   const el=document.getElementById(id);
   el.type=el.type==='password'?'text':'password';
   btn.textContent=el.type==='password'?'👁️':'🙈';
 }
-function login(){
-  const pw=document.getElementById('login-pw').value;
-  const errEl=document.getElementById('login-err');
-  if(btoa(pw)===PASS_B64){
-    errEl.classList.remove('show');
-    document.getElementById('login-pw').value='';
-    loadData();
-  } else {
+
+async function login(){
+  const pw  = document.getElementById('login-pw').value;
+  const errEl = document.getElementById('login-err');
+  const btn   = document.getElementById('login-btn');
+  errEl.classList.remove('show');
+  errEl.textContent = 'Incorrect password. Please try again.';
+
+  if(!pw){ errEl.classList.add('show'); return; }
+
+  btn.textContent = '🔄 Checking...';
+  btn.disabled = true;
+
+  try {
+    const ctrl  = new AbortController();
+    const timer = setTimeout(()=>ctrl.abort(), 8000);
+    const res   = await fetch(
+      `${SCRIPT_URL}?action=login&pw=${encodeURIComponent(pw)}`,
+      { signal: ctrl.signal }
+    );
+    clearTimeout(timer);
+    const json = await res.json();
+
+    if(json.ok){
+      document.getElementById('login-pw').value = '';
+      loadData();
+    } else {
+      errEl.classList.add('show');
+      document.getElementById('login-pw').select();
+    }
+  } catch(e){
+    errEl.textContent = e.name==='AbortError'
+      ? '⚠️ Server timeout. Try again.'
+      : '⚠️ Cannot reach server. Check connection.';
     errEl.classList.add('show');
-    document.getElementById('login-pw').select();
+  } finally {
+    btn.textContent = 'Unlock →';
+    btn.disabled = false;
   }
 }
+
 function logout(){ authed=false; txns=[]; pmts=[]; showScr('screen-login'); }
 
-/* ══ DATA SYNC (8-sec timeout) ══ */
+/* ══ DATA SYNC ══ */
 async function loadData(){
   showScr('screen-app');
   setSyn('loading','🔄 Loading...');
@@ -537,7 +553,6 @@ function rebuildDropdowns(){
     el.innerHTML=pre+opts;
     if(saved) el.value=saved;
   });
-  // Rebuild any open split rows
   document.querySelectorAll('.sr-st').forEach(sel=>{
     const saved=sel.value;
     sel.innerHTML=`<option value="">-- Select --</option>`+opts;
@@ -545,7 +560,7 @@ function rebuildDropdowns(){
   });
 }
 
-/* ══ STORE MANAGER MODAL ══ */
+/* ══ STORE MANAGER ══ */
 function openStoreModal(){
   renderStoreList();
   document.getElementById('ns-name').value='';
@@ -553,50 +568,37 @@ function openStoreModal(){
   document.getElementById('ns-err').style.display='none';
   openModal('mo-stores');
 }
-
 function renderStoreList(){
-  const all=getAllStores();
-  document.getElementById('store-list').innerHTML=all.map(s=>`
+  document.getElementById('store-list').innerHTML=getAllStores().map(s=>`
     <div class="store-row">
       <div class="store-info">
         <div class="sn">${esc(s.name)} ${s.custom?'<span class="store-custom">CUSTOM</span>':''}</div>
         <div class="sb">${esc(s.ba||'—')}</div>
       </div>
       ${s.custom?`<button class="btn btn-gray btn-sm" style="background:#F8D7DA;color:#842029;border:1px solid #F5C2C7;"
-        onclick="deleteCustomStore('${s.key}')">✕ Remove</button>`:''}
+        onclick="deleteCustomStore('${s.key}')">✕</button>`:''}
     </div>`).join('');
 }
-
 function addNewStore(){
   const name=document.getElementById('ns-name').value.trim();
   const ba=document.getElementById('ns-ba').value.trim();
   const errEl=document.getElementById('ns-err');
-  if(!name){
-    errEl.textContent='Store name is required.';
-    errEl.style.display='block'; return;
-  }
-  const key='CS_'+Date.now();
-  const store={key,name,ba,custom:true};
+  if(!name){errEl.textContent='Store name is required.';errEl.style.display='block';return;}
+  const store={key:'CS_'+Date.now(),name,ba,custom:true};
   customStores.push(store);
   localStorage.setItem('cap1_custom_stores',JSON.stringify(customStores));
-  rebuildDropdowns();
-  renderStoreList();
+  rebuildDropdowns(); renderStoreList();
   document.getElementById('ns-name').value='';
   document.getElementById('ns-ba').value='';
-  errEl.style.display='none';
-  // Flash confirmation
   errEl.textContent=`✅ "${name}" added!`;
-  errEl.style.display='block';
-  errEl.style.color='#0A3622';
+  errEl.style.display='block'; errEl.style.color='#0A3622';
   setTimeout(()=>{errEl.style.display='none';errEl.style.color='';},2500);
 }
-
 function deleteCustomStore(key){
-  if(!confirm('Remove this store? Past transactions assigned to it will keep their data.')) return;
+  if(!confirm('Remove this store?')) return;
   customStores=customStores.filter(s=>s.key!==key);
   localStorage.setItem('cap1_custom_stores',JSON.stringify(customStores));
-  rebuildDropdowns();
-  renderStoreList();
+  rebuildDropdowns(); renderStoreList();
 }
 
 /* ══ INIT ══ */
@@ -607,8 +609,7 @@ function initApp(){
   document.getElementById('cpa-from').value=`${y}-01-01`;
   document.getElementById('cpa-to').value=today();
   if(!document.querySelector('#split-rows .sr-item')) addSR();
-  updateSub();
-  renderPending();
+  updateSub(); renderPending();
 }
 
 /* ══ TABS ══ */
@@ -622,7 +623,6 @@ function swTab(tab,btn){
   if(tab==='pay')     renderPay();
   if(tab==='history') renderHist();
 }
-
 function updateSub(){
   const pend=txns.filter(t=>t.status==='PENDING');
   const tot=pend.reduce((s,t)=>s+t.amount,0);
@@ -823,9 +823,8 @@ function renderPay(){
   }).join('');
 }
 
-/* ══ PAY MODAL with checkboxes ══ */
+/* ══ PAY MODAL ══ */
 let actSK=null, actPend=[];
-
 function openPayModal(sk){
   actSK=sk;
   const store=SM[sk];
@@ -838,8 +837,7 @@ function openPayModal(sk){
       const si=t.stores.find(x=>x.storeKey===sk);
       const amt=si?.amount||0;
       return `<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;">
-        <input type="checkbox" id="pck-${i}" data-amt="${amt}" checked
-          onchange="recalcPayTotal()"
+        <input type="checkbox" id="pck-${i}" data-amt="${amt}" checked onchange="recalcPayTotal()"
           style="width:18px;height:18px;margin-top:3px;accent-color:#CC0000;cursor:pointer;flex-shrink:0;">
         <div style="flex:1;min-width:0;">
           <div style="font-size:.85rem;font-weight:700;">${esc(t.chargedBy)}</div>
@@ -860,7 +858,6 @@ function openPayModal(sk){
   document.getElementById('mp-note').value=`$${fmt(total)} paid via ${store?store.name:sk} ops acc`;
   openModal('mo-pay');
 }
-
 function recalcPayTotal(){
   const store=SM[actSK];
   let total=0;
@@ -873,7 +870,6 @@ function recalcPayTotal(){
   document.getElementById('mp-total').value=total.toFixed(2);
   document.getElementById('mp-note').value=`$${fmt(total)} paid via ${store?store.name:actSK} ops acc`;
 }
-
 function confirmPay(){
   const payoffDate=document.getElementById('mp-date').value;
   const conf=document.getElementById('mp-conf').value.trim().toUpperCase();
@@ -889,9 +885,7 @@ function confirmPay(){
   const pmt={id:uid(),storeKey:actSK,payoffDate,totalPaid,confirmationNumber:conf,
     payNote:note,createdAt:new Date().toISOString(),transactionIds:[]};
   txns.forEach(t=>{
-    if(selectedIds.includes(t.id)){
-      t.status='PAID'; t.paymentId=pmt.id; pmt.transactionIds.push(t.id);
-    }
+    if(selectedIds.includes(t.id)){t.status='PAID';t.paymentId=pmt.id;pmt.transactionIds.push(t.id);}
   });
   pmts.push(pmt); persist(); closeModal();
   const at=document.querySelector('.tab.active')?.id;
@@ -998,16 +992,15 @@ function parseCapOneCSV(text){
       const amount=parseFloat(rawAmt);
       if(isNaN(amount)||amount<=0) return;
       let date='';
-      if(/\d{4}-\d{2}-\d{2}/.test(rawDate)) date=rawDate;
-      else if(/\d{1,2}\/\d{1,2}\/\d{4}/.test(rawDate)){
+      if(/\d{1,2}\/\d{1,2}\/\d{4}/.test(rawDate)){
         const[m,d,y]=rawDate.split('/');date=`${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
-      } else return;
-      impRows.push({date,desc:rawDesc,amount,hint:''});
+      } else if(/\d{4}-\d{2}-\d{2}/.test(rawDate)){date=rawDate;} else return;
+      impRows.push({date,desc:rawDesc,amount:Math.abs(amount),hint:''});
     });
     statusEl.textContent=`✅ Parsed ${impRows.length} row${impRows.length!==1?'s':''}`;
   }
   if(!impRows.length){
-    document.getElementById('imp-prev').innerHTML='<div class="alert aw">⚠️ No charges found. Make sure this is a Capital One CSV with Debit amounts.</div>';
+    document.getElementById('imp-prev').innerHTML='<div class="alert aw">⚠️ No charges found.</div>';
     return;
   }
   renderImpPreview();
@@ -1050,13 +1043,12 @@ function renderImpPreview(){
   const sopts='<option value="">-- Select Store --</option>'+getAllStores().map(s=>`<option value="${s.key}">${s.name}</option>`).join('');
   let html=`<div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;flex-wrap:wrap;gap:8px;">
-      <div class="ct" style="margin-bottom:0;">Review &amp; Edit Before Importing (${impRows.length} charge${impRows.length!==1?'s':''})</div>
+      <div class="ct" style="margin-bottom:0;">Review &amp; Edit (${impRows.length} charge${impRows.length!==1?'s':''})</div>
       <div style="display:flex;gap:7px;">
         <button class="btn btn-green btn-sm" onclick="impAll()">✅ Post All</button>
         <button class="btn btn-gray btn-sm" onclick="clearImp()">✕ Clear</button>
       </div>
-    </div>
-    <p style="font-size:.75rem;color:#888;margin-bottom:10px;">Edit any field. Remove rows you don't need. Assign store &amp; purpose before posting.</p>`;
+    </div>`;
   impRows.forEach((r,i)=>{
     html+=`<div class="icard" id="irow-${i}">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:9px;">
@@ -1093,7 +1085,7 @@ function renderImpPreview(){
       </div>
     </div>`;
   });
-  html+=`<button class="btn btn-green btn-full" onclick="impAll()" style="margin-top:8px;">✅ Post ${impRows.length} Transaction${impRows.length!==1?'s':''} to Tracker</button></div>`;
+  html+=`<button class="btn btn-green btn-full" onclick="impAll()" style="margin-top:8px;">✅ Post ${impRows.length} Transaction${impRows.length!==1?'s':''}</button></div>`;
   document.getElementById('imp-prev').innerHTML=html;
 }
 function removeImpRow(i){ document.getElementById(`irow-${i}`)?.remove(); }
@@ -1117,10 +1109,7 @@ function impAll(){
       stores:[{storeKey:sk,amount}],status:'PENDING',paymentId:null,createdAt:new Date().toISOString()});
     cnt++;
   });
-  if(skipped>0&&cnt===0){
-    alert(`⚠️ ${skipped} row${skipped!==1?'s':''} missing Store or Purpose. Fill them in first.`);
-    return;
-  }
+  if(skipped>0&&cnt===0){alert(`⚠️ ${skipped} row${skipped!==1?'s':''} missing Store or Purpose.`);return;}
   persist();
   document.getElementById('imp-text').value='';
   document.getElementById('csv-status').textContent='';
